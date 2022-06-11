@@ -119,7 +119,7 @@ export default function FrontPage() {
       );
       index++;
     }
-    return <div className="grid grid-cols-6 gap-8">{rows}</div>;
+    return <div className="grid grid-cols-6 gap-6">{rows}</div>;
   };
 
   const changeParameter = (x) => {
@@ -140,9 +140,9 @@ export default function FrontPage() {
   };
 
   return (
-    <div className="pt-16 px-96">
+    <div className="pt-8 px-96">
       {/* First row */}
-      <div className="my-5 grid grid-cols-2 gap-4">
+      <div className="mt-5 grid grid-cols-2 gap-4">
         <div className="text-3xl row-span-2">Home</div>
         {/* Ada banyak badges disini */}
         <div className="flex row-span-2 gap-4 justify-self-end">
@@ -158,7 +158,7 @@ export default function FrontPage() {
 
       {/* Second row */}
       <div className="grid grid-cols-4 gap-4 text-gray-500 ">
-        <div className="my-5 p-8 col-span-1 text-sm rounded-md bg-white shadow-lg">
+        <div className="mt-5 p-8 col-span-1 text-sm rounded-md bg-white shadow-lg">
           <div>Last Update</div>
           {lastUpdatedTime && (
             <div className="text-sm text-teal-700">
@@ -170,24 +170,24 @@ export default function FrontPage() {
           <div className="border-t border-gray-500"></div>
           <div className="">Log Summary</div>
           <div className="font-bold">Last 24 Hours</div>
-
           <DataUpdateColumns title={"Data Transfer"} />
-
           <DataUpdateColumns title={"Measurement"} />
-
           <DataUpdateColumns title={"Device Health"} />
         </div>
+
         {/* Ini untuk chart */}
-        <div className="my-5 col-span-3 bg-white rounded-md shadow-lg">
+        <div className="mt-5 col-span-3 bg-white rounded-md shadow-lg">
           <div className="grid grid-cols-4">
-            <aside className="grid rounded-md ">
-              <div className="pt-5 pl-5 text-3xl">{filterParameter}</div>
-              {lastRetrievedData && (
-                <div className="pl-5 text-3xl">
-                  {lastRetrievedData[filterParameter]}
-                </div>
-              )}
-              <div className={"grid grid-cols-2"}>
+            <aside className="flex flex-col place-content-stretch">
+              <div className="">
+                <div className="pt-5 pl-5 text-3xl">{filterParameter}</div>
+                {lastRetrievedData && (
+                  <div className="pl-5 text-3xl">
+                    {lastRetrievedData[filterParameter]}
+                  </div>
+                )}
+              </div>
+              <div className="grid grid-cols-2 self-stretch">
                 <div className="pl-5">Unit ID</div>
                 <div className="pl-5">01</div>
                 <div className="pl-5">Device ID</div>
@@ -202,7 +202,7 @@ export default function FrontPage() {
               </div>
             </aside>
 
-            <div className={"col-span-3"}>
+            <div className="col-span-3">
               <div className="flex flex-col ">
                 <div className="flex flex-row-reverse mt-4 mr-12 ">
                   <Dropdown text={"Select Date"} />
@@ -231,8 +231,8 @@ export default function FrontPage() {
       </div>
 
       {/* Third row */}
-      <div className="py-5 flex flex-row-reverse">
-        <div className="p-5">
+      <div className="pb-2 flex flex-row-reverse">
+        <div className="pl-5">
           <Dropdown text={"All Units"} />
         </div>
         <div className="pl-5">
