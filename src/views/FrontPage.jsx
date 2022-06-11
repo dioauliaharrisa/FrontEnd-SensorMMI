@@ -23,7 +23,8 @@ export default function FrontPage() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:3000/data",
+      url: "https://mmi-sensor-server.herokuapp.com/data",
+      // url: "http://localhost:3000/data",
     }).then(({ data }) => {
       setData(data.data);
       let modifiedData = data.data[data.data.length - 1];
@@ -63,7 +64,8 @@ export default function FrontPage() {
       (async () => {
         axios({
           method: "get",
-          url: "http://localhost:3000/data",
+          url: "https://mmi-sensor-server.herokuapp.com/data",
+          // url: "http://localhost:3000/data",
         }).then(({ data }) => {
           setData(data.data);
           let modifiedData = data.data[data.data.length - 1];
