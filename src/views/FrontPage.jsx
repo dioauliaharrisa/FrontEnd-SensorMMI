@@ -3,13 +3,8 @@ import UnitCard from "../components/UnitCard";
 import RoundedBadge from "../components/RoundedBadge";
 import DataUpdateColumns from "../components/DataUpdateColumns";
 import Dropdown from "../components/Dropdown";
-import * as V from "victory";
-import {
-  VictoryChart,
-  VictoryTheme,
-  VictoryLine,
-  VictoryContainer,
-} from "victory";
+
+import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
 const axios = require("axios");
 
 export default function FrontPage() {
@@ -18,6 +13,8 @@ export default function FrontPage() {
   const [filterParameter, setFilterParameter] = useState("debit");
   const [lastRetrievedData, setLastRetrievedData] = useState(null);
   const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
+
+  if (filteredData) console.log(filteredData[0], filterParameter);
 
   // useEffect yg hanya jalan diawal
   useEffect(() => {
@@ -43,10 +40,11 @@ export default function FrontPage() {
         Object.keys(e).forEach((el) => {
           // console.log(el)
           if (el == filterParameter) {
-            obj[filterParameter] = e[filterParameter];
+            const x = e[filterParameter].split(" ");
+            obj["y"] = +x[0];
           }
           if (el == "id") {
-            obj["id"] = e["id"];
+            obj["x"] = e["id"];
           }
         });
 
@@ -75,9 +73,12 @@ export default function FrontPage() {
           delete modifiedData["id"];
           delete modifiedData["createdAt"];
           delete modifiedData["updatedAt"];
+
           setLastRetrievedData(modifiedData);
 
           const temp = [];
+
+          console.log(filterParameter, 666);
 
           data.data.filter((e) => {
             const obj = {};
@@ -93,7 +94,8 @@ export default function FrontPage() {
             temp.push(obj);
             return temp;
           });
-          setFilteredData(temp);
+
+          setFilteredData(temp) 
         });
       })();
     }, 10000);
@@ -103,16 +105,13 @@ export default function FrontPage() {
     };
   }, []);
 
-  // console.log(data);
-  console.log(filterParameter);
-
   const iterator = (data) => {
     const rows = [];
     let index = 0;
     for (const element in data) {
-      console.log(element, typeof element, 666);
       rows.push(
         <UnitCard
+        onClick={() => {console.log('woy')}}
           importedSetFilterParameter={setFilterParameter}
           key={index}
           parameter={element}

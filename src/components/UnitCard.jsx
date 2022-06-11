@@ -1,6 +1,14 @@
 import React, { useCallback } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
-export default function UnitCard({ parameter, value, importedSetFilterParameter }) {
+export default function UnitCard({
+  parameter,
+  value,
+  importedSetFilterParameter,
+}) {
+  const [param, setParam] = useState(parameter);
+
   const splittedValue = value.split(" ");
   const magnitude = splittedValue[0];
   const unit = splittedValue[1];
@@ -17,7 +25,9 @@ export default function UnitCard({ parameter, value, importedSetFilterParameter 
 
   return (
     <div
-      onClick={() => importedSetFilterParameter(parameter)}
+      onClick={() => {
+        importedSetFilterParameter(param);
+      }}
       className={`${className()} p-2 rounded-lg shadow-xl flex-col cursor-pointer`}
     >
       {/* disini ada nama datanya beserta unit dengan nomornya */}
