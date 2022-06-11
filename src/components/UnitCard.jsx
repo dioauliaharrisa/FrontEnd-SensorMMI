@@ -7,8 +7,6 @@ export default function UnitCard({
   value,
   importedSetFilterParameter,
 }) {
-  const [param, setParam] = useState(parameter);
-
   const splittedValue = value.split(" ");
   const magnitude = splittedValue[0];
   const unit = splittedValue[1];
@@ -25,9 +23,7 @@ export default function UnitCard({
 
   return (
     <div
-      onClick={() => {
-        importedSetFilterParameter(param);
-      }}
+      onClick={() => importedSetFilterParameter(parameter)}
       className={`${className()} p-2 rounded-lg shadow-xl flex-col cursor-pointer`}
     >
       {/* disini ada nama datanya beserta unit dengan nomornya */}

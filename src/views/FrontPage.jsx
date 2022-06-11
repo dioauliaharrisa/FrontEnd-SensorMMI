@@ -8,7 +8,7 @@ import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
 const axios = require("axios");
 
 export default function FrontPage() {
-  const [data, setData] = useState(null);
+  const [wholeData, setWholeData] = useState(null);
   const [filteredData, setFilteredData] = useState(null);
   const [filterParameter, setFilterParameter] = useState("debit");
   const [lastRetrievedData, setLastRetrievedData] = useState(null);
@@ -23,7 +23,7 @@ export default function FrontPage() {
       url: "https://mmi-sensor-server.herokuapp.com/data",
       // url: "http://localhost:3000/data",
     }).then(({ data }) => {
-      setData(data.data);
+      setWholeData(data.data);
       let modifiedData = data.data[data.data.length - 1];
 
       setLastUpdatedTime(modifiedData["createdAt"]);
@@ -65,7 +65,8 @@ export default function FrontPage() {
           url: "https://mmi-sensor-server.herokuapp.com/data",
           // url: "http://localhost:3000/data",
         }).then(({ data }) => {
-          setData(data.data);
+          //set data keseluruhannya
+          setWholeData(data.data);
           let modifiedData = data.data[data.data.length - 1];
 
           setLastUpdatedTime(modifiedData["createdAt"]);
@@ -78,11 +79,10 @@ export default function FrontPage() {
 
           const temp = [];
 
-          console.log(filterParameter, 666);
-
-          data.data.filter((e) => {
+          wholeData.filter((e) => {
+            // console.log(filterParameter, 666);
             const obj = {};
-            Object.keys(e).forEach((el) => {
+            Object.keys(e).forEach((el, i) => {
               if (el == filterParameter) {
                 const x = e[filterParameter].split(" ");
                 obj["y"] = +x[0];
@@ -94,16 +94,15 @@ export default function FrontPage() {
             temp.push(obj);
             return temp;
           });
-
-          setFilteredData(temp) 
+          setFilteredData(temp);
         });
       })();
-    }, 10000);
+    }, 1000);
 
     return () => {
       clearInterval(t);
     };
-  }, []);
+  }, [filteredData]);
 
   const iterator = (data) => {
     const rows = [];
@@ -111,7 +110,6 @@ export default function FrontPage() {
     for (const element in data) {
       rows.push(
         <UnitCard
-        onClick={() => {console.log('woy')}}
           importedSetFilterParameter={setFilterParameter}
           key={index}
           parameter={element}
@@ -121,10 +119,6 @@ export default function FrontPage() {
       index++;
     }
     return <div className="grid grid-cols-6 gap-6">{rows}</div>;
-  };
-
-  const changeParameter = (x) => {
-    console.log(x);
   };
 
   const homeIcon = () => {
@@ -181,7 +175,9 @@ export default function FrontPage() {
           <div className="grid grid-cols-4">
             <aside className="flex flex-col place-content-stretch">
               <div className="">
-                <div className="pt-5 pl-5 text-3xl">{filterParameter}</div>
+                <div className="pt-5 pl-5 text-3xl text-red-500">
+                  {filterParameter}
+                </div>
                 {lastRetrievedData && (
                   <div className="pl-5 text-3xl">
                     {lastRetrievedData[filterParameter]}
