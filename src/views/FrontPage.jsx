@@ -118,7 +118,7 @@ export default function FrontPage() {
       );
       index++;
     }
-    return <div className="grid grid-cols-6 gap-6">{rows}</div>;
+    return <div className="grid grid-cols-6 gap-4 pb-20">{rows}</div>;
   };
 
   const homeIcon = () => {
@@ -135,7 +135,7 @@ export default function FrontPage() {
   };
 
   return (
-    <div className="pt-8 px-96">
+    <div className="pt-8 px-8 md:px-12 lg:px-20">
       {/* First row */}
       <div className="mt-5 grid grid-cols-2 gap-4">
         <div className="text-3xl row-span-2">Home</div>

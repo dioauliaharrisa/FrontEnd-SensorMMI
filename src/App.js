@@ -3,10 +3,10 @@ import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
-    <div className="App">
-      <div className="bg-slate-200 h-screen">
+    <div className="App h-screen">
+      <div className="bg-slate-200">
         <NavigationBar />
-        <FrontPage/>
+        <FrontPage />
       </div>
     </div>
   );

@@ -1,7 +1,3 @@
-import React, { useCallback } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-
 export default function UnitCard({
   parameter,
   value,
